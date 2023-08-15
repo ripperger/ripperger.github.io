@@ -15,7 +15,7 @@
     <script>
         
             function openQuest() {
-                var pageId = document.querySelector('#pageId').value;
+                var pageId = document.querySelector('#pageId').value.toLowerCase();
                 const url = pageId + '.html';
                 window.open(url, '_self');
             }
@@ -28,7 +28,7 @@
     <p>Írd be a kérdés kódját:</p>
     <div>
 
-        <input id='pageId' type="text"/>
+        <input id='pageId' type="text" autofocus/>
         <button onclick="openQuest()">Mehet</button>
     </div>
 

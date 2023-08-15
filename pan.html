@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/styles.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400&family=Rubik:wght@500&family=Source+Serif+4:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+
+    <title>Pangramma!</title>
+    <script>
+        
+        var simple = "aábcdeéfgiíjklmnoóöőpqrstuúüűvwxyz";
+        var double = ["cs", "dz", "gy", "ly", "ny", "sz", "ty", "zs"];
+        var triple = "dzs";
+        var inputCnt = "";
+
+
+        document.addEventListener('DOMContentLoaded', () =>  {
+            try {
+                const input = document.querySelector('#pan_test');
+                const count = document.querySelector('#count');
+                var temp = 0;
+                var inputTxt = "";
+
+                input.addEventListener('keyup', function(event) {
+
+                    reset();
+                    temp = 0;
+                    inputTxt = input.value.toLowerCase();
+                    if (inputTxt.length == 0) { 
+                        count.innerHTML = 0;
+                    }
+                    else {
+                        inputCnt = inputTxt;
+                        // triple = "dzs";
+                    }
+                    for (let i = 0; i < inputTxt.length; i++)
+                    {
+
+                        if (inputCnt.includes(triple)){
+                            // temp += 1;
+                            // count.innerHTML = temp;
+                            inputCnt = inputCnt.replace(triple, "333");
+                            triple = "333";
+                            // double[1] = "dz";
+                            test();
+
+                        }
+
+                        for (let j = 0; j < double.length; j++)
+                        {
+                            if (isNaN(double[j]) && inputCnt.includes(double[j]))
+                            {
+                                // temp += 1;
+                                // count.innerHTML = temp;
+                                inputCnt = inputCnt.replace(double[j], "22");
+                                // simple = simple + double[j];
+                                double[j] = "22";
+                                test();
+                            }
+                        }
+
+                        for (let k = 0; k < simple.length; k++)
+                        {
+                            if (isNaN(simple[k]) && inputCnt.includes(simple[k])) {
+                                // temp += 1;
+                                // count.innerHTML = temp;
+                                inputCnt = inputCnt.replace(simple[k], "1");
+                                simple = simple.replace(simple[k], "1");
+                                test();
+
+                            }
+                       
+
+                        }
+                    };
+                    count.innerHTML = counter();
+                });
+            } 
+            catch (error) {}
+        })
+        
+        function counter()
+        {
+            var sum = 0;
+            if (triple == "333") { sum += 1; }
+            for (let i = 0; i < double.length; i++)
+            {
+                if (double[i] == "22") { sum += 1; }
+            }
+            for (let j = 0; j < simple.length; j++)
+            {
+                if (simple[j] == "1") { sum++; }
+            }
+            return sum;
+        }
+
+        function test()
+        {
+            console.log(triple);
+            console.log(double);
+            console.log(simple);
+            console.log(inputCnt);
+        }
+
+        function reset()
+        {
+            simple = "aábcdeéfgiíjklmnoóöőpqrstuúüűvwxyz";
+            double = ["cs", "dz", "gy", "ly", "ny", "sz", "ty", "zs"];
+            triple = "dzs";
+        }
+    
+    </script>
+</head>
+<body>
+    <p>Pangrammatesztelő</p>
+
+    <div>
+
+        <textarea id='pan_test' autofocus></textarea>
+        <span id="count">0</span>
+
+    </div>
+
+    <div class="go-home">
+        <br>
+        <a href="index.html">Vissza a kezdőoldalra</a>
+    </div>
+
+</body>
+</html>
